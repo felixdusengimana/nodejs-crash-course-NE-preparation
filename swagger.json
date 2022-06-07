@@ -134,6 +134,35 @@
                         }
                     }
                 }
+            },
+                        "/api/v1/users/login": {
+                "post": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Login of the user",
+                    "parameters": [
+                        {
+                            "name": "username",
+                            "in": "body",
+                            "description": "Adding user to login",
+                            "schema": {
+                                "$ref": "#/definitions/Login"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "201": {
+                            "description": "User added successfully"
+                        },
+                        "400": {
+                            "description": "Bad request"
+                        },
+                        "500": {
+                            "description": "Internal Server Error"
+                        }
+                    }
+                }
             }
         },
         "definitions": {

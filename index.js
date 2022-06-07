@@ -1,4 +1,4 @@
-const {connectToDB} = require("./config/db")
+const {connectToDB} = require("./src/config/db")
 require('dotenv').config();
 const express = require('express')
 const cors = require('cors')
@@ -23,7 +23,7 @@ app.get("/", (req, res)=>{
     res.send("Welcome to NE preparation APIs")
 })
 
-require("./routes/user.router")(app);
+require("./src/routes/user.router")(app);
 
 app.listen(port, ()=>{
     console.log(`Application running on port ${port}`);
