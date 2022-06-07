@@ -1,0 +1,201 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "title": "Swagger API",
+            "description": "Swagger API",
+            "version": "1.0.0",
+            "license": {
+                "name": "MIT",
+                "url": "https://opensource.org/licenses/MIT"
+            }
+        },
+        "securityDefinitions": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "name": "authorization",
+                "scheme": "bearer",
+                "in": "header"
+            }
+        },
+        "host": "localhost:3000",
+        "basePath": "/",
+        "schemes": [
+            "http"
+        ],
+        "consumes": [
+            "application/json"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "paths": {
+            "/api/v1/users": {
+                "get": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Get all Users",
+                    "responses": {
+                        "200": {
+                            "description": "A list of users",
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "/api/v1/users/add": {
+                "post": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Create a new User",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "description": "User object that needs to be added to the store",
+                            "required": true,
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User added successfully"
+                        },
+                        "400": {
+                            "description": "Invalid user supplied"
+                        }
+                    }
+                }
+            },
+            "/api/v1/users/{id}": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of user to fetch",
+                        "type": "string"
+                    }
+                ],
+                "get": {
+                    "summary": "Get user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User retrieved successfully"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Update user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "description": "User object that needs to be added to the store",
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User updated successfully"
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Delete user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User deleted successfully"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "definitions": {
+            "User": {
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password",
+                    "username",
+                    "isAdmin",
+                    "phone"
+                ],
+                "properties": {
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "isAdmin": {
+                        "type": "boolean"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Login": {
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/User"
+            }
+        }
+    },
+    "apis": [
+        "./src/routes/*"
+    ]
+}
